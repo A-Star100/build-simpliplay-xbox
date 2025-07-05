@@ -10,5 +10,6 @@
   <ItemGroup>
     <Page Include="App.xaml" />
     <Page Include="MainPage.xaml" />
+    <Content Include="WebAssets\**\*.*" />
   </ItemGroup>
 </Project>
