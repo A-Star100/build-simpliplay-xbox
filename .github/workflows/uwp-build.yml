@@ -1,9 +1,17 @@
+name: Build UWP App
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
 jobs:
   build:
     runs-on: windows-2022
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v1
@@ -11,10 +19,10 @@ jobs:
       - name: Restore NuGet packages
         run: nuget restore SimpliPlay/SimpliPlay/SimpliPlay.sln
 
-      - name: Install Windows 10 SDK 19041.0 Developer Pack
+      - name: Install Windows 10 SDK 19041 Developer Pack
+        shell: powershell
         run: |
           choco install windows-sdk-10.1 -y
-        shell: powershell
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1.1
