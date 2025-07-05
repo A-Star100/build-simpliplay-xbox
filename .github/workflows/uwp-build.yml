@@ -46,7 +46,7 @@ jobs:
 
     - name: Build UWP solution and create app package
       shell: cmd
-      run: msbuild SimpliPlay/SimpliPlay/SimpliPlay.sln /p:Configuration=Debug
+      run: msbuild SimpliPlay/SimpliPlay/SimpliPlay.sln /p:Configuration=Debug /p:Platform=x86
 
     - name: Publish app package artifact
       uses: actions/upload-artifact@v4
