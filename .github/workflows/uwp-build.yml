@@ -20,6 +20,7 @@ jobs:
       run: nuget restore SimpliPlay/SimpliPlay/SimpliPlay.sln
 
     - name: Build UWP solution and create app package
+      shell: cmd
       run: msbuild SimpliPlay/SimpliPlay/SimpliPlay.sln /p:Configuration=Release /p:Platform=x86 /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload
 
     - name: Publish app package artifact
