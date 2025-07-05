@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>uap10.0</TargetFramework>
-    <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.1.19041.0</TargetPlatformVersion>
     <OutputType>WinExe</OutputType>
     <RootNamespace>SimpliPlay</RootNamespace>
     <ApplicationManifest>Package.appxmanifest</ApplicationManifest>
