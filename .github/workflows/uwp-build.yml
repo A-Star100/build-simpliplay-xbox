@@ -23,7 +23,7 @@ jobs:
       run: msbuild SimpliPlay.sln /p:Configuration=Release /p:Platform=x86 /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload
 
     - name: Publish app package artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: uwp-package
         path: SimpliPlay\bin\x86\Release\AppPackages\
