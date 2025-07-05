@@ -3,17 +3,23 @@
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  IgnorableNamespaces="uap mp rescap">
+  IgnorableNamespaces="uap rescap">
 
-  <Identity Name="AnirudhSevugan.SimpliPlay" Publisher="CN=AnirudhSevugan" Version="1.0.0.0" />
+  <Identity Name="AnirudhSevugan.SimpliPlay"
+            Publisher="CN=AnirudhSevugan"
+            Version="1.0.0.0" />
+
   <Properties>
     <DisplayName>SimpliPlay</DisplayName>
-    <PublisherDisplayName>AnirudhSevugan</PublisherDisplayName>
+    <PublisherDisplayName>Anirudh Sevugan</PublisherDisplayName>
     <Description>SimpliPlay, a simple media player, now on your favorite gaming console.</Description>
+    <Logo>Assets\StoreLogo.png</Logo> <!-- You can use a tiny placeholder here -->
   </Properties>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.19041.0" MaxVersionTested="10.0.22000.0" />
+    <TargetDeviceFamily Name="Windows.Universal"
+                        MinVersion="10.0.19041.0"
+                        MaxVersionTested="10.0.22000.0" />
   </Dependencies>
 
   <Resources>
@@ -21,10 +27,17 @@
   </Resources>
 
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="MyUwpApp.App">
-      <uap:VisualElements DisplayName="SimpliPlay" Square150x150Logo="Assets\StoreLogo.png" Square44x44Logo="Assets\SmallLogo.png" Description="SimpliPlay, a simple media player, now on your favorite gaming console." BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\WideLogo.png" />
-        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+    <Application Id="App"
+                 Executable="$targetnametoken$.exe"
+                 EntryPoint="MyUwpApp.App">
+      <uap:VisualElements
+        DisplayName="SimpliPlay"
+        Description="SimpliPlay, a simple media player."
+        BackgroundColor="transparent"
+        Square44x44Logo="Assets\Logo.png"
+        Square150x150Logo="Assets\Logo.png">
+        <uap:DefaultTile />
+        <uap:SplashScreen Image="Assets\Logo.png" />
       </uap:VisualElements>
     </Application>
   </Applications>
