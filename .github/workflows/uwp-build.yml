@@ -10,29 +10,29 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+    - name: Checkout repo
+      uses: actions/checkout@v3
 
-      - name: Setup NuGet
-        uses: NuGet/setup-nuget@v1
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1
 
-      - name: Restore NuGet packages
-        run: nuget restore SimpliPlay/SimpliPlay/SimpliPlay.sln
+    - name: Restore NuGet packages
+      run: nuget restore SimpliPlay/SimpliPlay/SimpliPlay.sln
 
-      - name: Install Windows 10 SDK 19041 Developer Pack
-        shell: powershell
-        run: |
-          choco install windows-sdk-10.1 -y
+    - name: Install Windows 10 SDK 19041
+      shell: pwsh
+      run: |
+        choco install windows-sdk-10.1.19041.0 -y
 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1.1
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
 
-      - name: Build UWP solution and create app package
-        shell: cmd
-        run: msbuild SimpliPlay/SimpliPlay/SimpliPlay.sln /p:Configuration=Release /p:Platform=x86 /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload /p:TargetPlatformVersion=10.0.19041.0
+    - name: Build UWP solution and create app package
+      shell: cmd
+      run: msbuild SimpliPlay/SimpliPlay/SimpliPlay.sln /p:Configuration=Release /p:Platform=x86 /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload /p:TargetPlatformVersion=10.1.19041.0
 
-      - name: Publish app package artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: uwp-package
-          path: SimpliPlay/SimpliPlay/bin/x86/Release/AppPackages/
+    - name: Publish app package artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: uwp-package
+        path: SimpliPlay/SimpliPlay/bin/x86/Release/AppPackages/
