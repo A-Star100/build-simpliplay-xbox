@@ -19,6 +19,9 @@ jobs:
     - name: Restore NuGet packages
       run: nuget restore SimpliPlay/SimpliPlay/SimpliPlay.sln
 
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+
     - name: Build UWP solution and create app package
       shell: cmd
       run: msbuild SimpliPlay/SimpliPlay/SimpliPlay.sln /p:Configuration=Release /p:Platform=x86 /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload
