@@ -17,13 +17,13 @@ jobs:
       uses: NuGet/setup-nuget@v1
 
     - name: Restore NuGet packages
-      run: nuget restore YourSolution.sln
+      run: nuget restore SimpliPlay.sln
 
-    - name: Build UWP solution
-      run: msbuild YourSolution.sln /p:Configuration=Release /p:Platform=x86
+    - name: Build UWP solution and create app package
+      run: msbuild SimpliPlay.sln /p:Configuration=Release /p:Platform=x86 /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload
 
     - name: Publish app package artifact
       uses: actions/upload-artifact@v3
       with:
         name: uwp-package
-        path: path\to\your\appx\or\msix\package
+        path: SimpliPlay\bin\x86\Release\AppPackages\
