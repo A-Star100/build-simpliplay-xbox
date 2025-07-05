@@ -1,0 +1,29 @@
+name: Build UWP App
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1
+
+    - name: Restore NuGet packages
+      run: nuget restore YourSolution.sln
+
+    - name: Build UWP solution
+      run: msbuild YourSolution.sln /p:Configuration=Release /p:Platform=x86
+
+    - name: Publish app package artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: uwp-package
+        path: path\to\your\appx\or\msix\package
