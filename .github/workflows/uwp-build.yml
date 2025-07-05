@@ -19,17 +19,34 @@ jobs:
     - name: Restore NuGet packages
       run: nuget restore SimpliPlay/SimpliPlay/SimpliPlay.sln
 
-    - name: Install Windows 11 SDK 10.0
+    - name: Upgrade Chocolatey (to latest)
+      shell: pwsh
+      run: choco upgrade chocolatey -y
+
+    - name: Install Windows 10 SDK 10.0.19041.0
       shell: pwsh
       run: |
-        choco install windows-sdk-10.0 -y
+        if (-not (choco list --localonly | Select-String 'windows-sdk-10.0.19041.0')) {
+          choco install windows-sdk-10.0.19041.0 -y
+        } else {
+          Write-Host "Windows SDK 10.0.19041.0 already installed."
+        }
+
+    - name: Install UWP Build Tools
+      shell: pwsh
+      run: |
+        if (-not (choco list --localonly | Select-String 'visualstudio2022-workload-universal')) {
+          choco install visualstudio2022-workload-universal --no-progress -y
+        } else {
+          Write-Host "UWP workload already installed."
+        }
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.1
 
     - name: Build UWP solution and create app package
       shell: cmd
-      run: msbuild SimpliPlay/SimpliPlay/SimpliPlay.sln /p:Configuration=Release /p:Platform=x86 /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload /p:TargetPlatformVersion=10.0
+      run: msbuild SimpliPlay/SimpliPlay/SimpliPlay.sln /p:Configuration=Release /p:Platform=x86 /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload /p:TargetPlatformVersion=10.0.19041.0
 
     - name: Publish app package artifact
       uses: actions/upload-artifact@v4
