@@ -1,38 +1,30 @@
-name: Build UWP App
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-
 jobs:
   build:
     runs-on: windows-2022
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1
 
-    - name: Install Windows 10 SDK targeting pack (UWP)
-      shell: pwsh
-      run: |
-        & "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" modify --installPath "C:\Program Files\Microsoft Visual Studio\2022\Enterprise" --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --quiet --wait
+      - name: Restore NuGet packages
+        run: nuget restore SimpliPlay/SimpliPlay/SimpliPlay.sln
 
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.1
+      - name: Install Windows 10 SDK 19041.0 Developer Pack
+        run: |
+          choco install windows-sdk-10.1 -y
+        shell: powershell
 
-    - name: Restore NuGet packages
-      run: nuget restore SimpliPlay/SimpliPlay/SimpliPlay.sln
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.1
 
-    - name: Build UWP solution and create app package
-      shell: cmd
-      run: msbuild SimpliPlay/SimpliPlay/SimpliPlay.sln /p:Configuration=Release /p:Platform=x86 /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload
+      - name: Build UWP solution and create app package
+        shell: cmd
+        run: msbuild SimpliPlay/SimpliPlay/SimpliPlay.sln /p:Configuration=Release /p:Platform=x86 /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload /p:TargetPlatformVersion=10.0.19041.0
 
-    - name: Publish app package artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: uwp-package
-        path: SimpliPlay/SimpliPlay/bin/x86/Release/AppPackages/
+      - name: Publish app package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: uwp-package
+          path: SimpliPlay/SimpliPlay/bin/x86/Release/AppPackages/
