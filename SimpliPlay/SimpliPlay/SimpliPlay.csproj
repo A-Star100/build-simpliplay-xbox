@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <TargetFramework>uap10.0</TargetFramework>
+    <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MyUwpApp</RootNamespace>
-    <UseWinUI>true</UseWinUI>
+    <RootNamespace>SimpliPlay</RootNamespace>
     <ApplicationManifest>Package.appxmanifest</ApplicationManifest>
   </PropertyGroup>
 
@@ -12,4 +13,5 @@
     <Page Include="MainPage.xaml" />
     <Content Include="WebAssets\**\*.*" />
   </ItemGroup>
+
 </Project>
