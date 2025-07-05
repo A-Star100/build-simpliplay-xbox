@@ -32,6 +32,17 @@ jobs:
           Write-Host "Windows SDK 10.0 already installed."
         }
 
+    - name: Install Windows 10 SDK 10.0.26624 Developer Pack
+      shell: pwsh
+      run: |
+        $url = "https://go.microsoft.com/fwlink/p/?LinkId=619296"
+        $installer = "$env:TEMP\winsdksetup.exe"
+        Invoke-WebRequest -Uri $url -OutFile $installer
+        Start-Process -FilePath $installer -ArgumentList '/quiet', '/norestart' -Wait
+        Remove-Item $installer
+
+
+
     - name: Install UWP Build Tools workload
       shell: pwsh
       run: |
@@ -52,4 +63,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: uwp-package
-        path: SimpliPlay/SimpliPlay/bin/x86/Release/AppPackages/
+        path: SimpliPlay/SimpliPlay/bin/x86/Debug/AppPackages/
