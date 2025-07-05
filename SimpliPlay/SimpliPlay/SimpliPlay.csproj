@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFramework>uap10.0</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>MyUwpApp</RootNamespace>
+    <UseWinUI>true</UseWinUI>
+    <ApplicationManifest>Package.appxmanifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Page Include="App.xaml" />
+    <Page Include="MainPage.xaml" />
+  </ItemGroup>
+</Project>
