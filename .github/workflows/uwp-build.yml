@@ -41,10 +41,10 @@ jobs:
         Start-Process -FilePath $installer -ArgumentList '/quiet', '/norestart' -Wait
         Remove-Item $installer
 
-    - name: Fallback: Register SDK 10.0.26624 with DISM
-      shell: pwsh
-      run: |
-        DISM /Online /Add-Capability /CapabilityName:WindowsSoftwareDevelopmentKit.10.0.26624.0~~~~x86~ /NoRestart
+    - name: Fallback - Register SDK with DISM
+      shell: cmd
+      run: DISM /Online /Add-Capability /CapabilityName:WindowsSoftwareDevelopmentKit.10.0.26624.0~~~~x86~ /NoRestart
+
 
     - name: Verify SDK installation
       shell: pwsh
