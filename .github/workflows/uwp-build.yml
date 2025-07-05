@@ -23,16 +23,16 @@ jobs:
       shell: pwsh
       run: choco upgrade chocolatey -y
 
-    - name: Install Windows 10 SDK 10.0.19041.0
+    - name: Install Windows 10 SDK (latest 10.x)
       shell: pwsh
       run: |
-        if (-not (choco list --localonly | Select-String 'windows-sdk-10.0.19041.0')) {
-          choco install windows-sdk-10.0.19041.0 -y
+        if (-not (choco list --localonly | Select-String 'windows-sdk-10.0')) {
+          choco install windows-sdk-10.0 -y
         } else {
-          Write-Host "Windows SDK 10.0.19041.0 already installed."
+          Write-Host "Windows SDK 10.0 already installed."
         }
 
-    - name: Install UWP Build Tools
+    - name: Install UWP Build Tools workload
       shell: pwsh
       run: |
         if (-not (choco list --localonly | Select-String 'visualstudio2022-workload-universal')) {
