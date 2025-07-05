@@ -5,6 +5,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>SimpliPlay</RootNamespace>
     <ApplicationManifest>Package.appxmanifest</ApplicationManifest>
+    <ProjectGUID>{ACCCD975-D182-4300-B0AC-A70F74389AB3}</ProjectGUID>
   </PropertyGroup>
 
   <ItemGroup>
