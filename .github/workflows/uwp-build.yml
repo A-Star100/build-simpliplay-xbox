@@ -32,11 +32,21 @@ jobs:
           Write-Host "Windows SDK 10.0 already installed."
         }
 
-    - name: Install Windows 10 SDK 10.0.26624 Developer Pack
+    - name: Install Windows 10 SDK Developer Pack (10.0.26624)
       shell: pwsh
       run: |
         $url = "https://go.microsoft.com/fwlink/p/?LinkId=619296"
         $installer = "$env:TEMP\winsdksetup.exe"
+        Invoke-WebRequest -Uri $url -OutFile $installer
+        Start-Process -FilePath $installer -ArgumentList '/quiet', '/norestart' -Wait
+        Remove-Item $installer
+
+          
+    - name: Install Visual Studio 2022 .NET SDK
+      shell: pwsh
+      run: |
+        $url = "https://builds.dotnet.microsoft.com/dotnet/Sdk/9.0.301/dotnet-sdk-9.0.301-win-x86.exe"
+        $installer = "$env:TEMP\dotnet-sdk-9.0.301-win-x86.exe"
         Invoke-WebRequest -Uri $url -OutFile $installer
         Start-Process -FilePath $installer -ArgumentList '/quiet', '/norestart' -Wait
         Remove-Item $installer
