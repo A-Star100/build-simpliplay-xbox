@@ -13,7 +13,7 @@
     <DisplayName>SimpliPlay</DisplayName>
     <PublisherDisplayName>Anirudh Sevugan</PublisherDisplayName>
     <Description>SimpliPlay, a simple media player, now on your favorite gaming console.</Description>
-    <Logo>Assets\StoreLogo.png</Logo> <!-- You can use a tiny placeholder here -->
+    <Logo>Assets\Logo.png</Logo> <!-- You can use a tiny placeholder here -->
   </Properties>
 
   <Dependencies>
@@ -29,7 +29,7 @@
   <Applications>
     <Application Id="App"
                  Executable="$targetnametoken$.exe"
-                 EntryPoint="MyUwpApp.App">
+                 EntryPoint="SimpliPlay.App">
       <uap:VisualElements
         DisplayName="SimpliPlay"
         Description="SimpliPlay, a simple media player."
