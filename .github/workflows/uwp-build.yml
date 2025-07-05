@@ -19,17 +19,17 @@ jobs:
     - name: Restore NuGet packages
       run: nuget restore SimpliPlay/SimpliPlay/SimpliPlay.sln
 
-    - name: Install Windows 11 SDK 10.0.22000.194
+    - name: Install Windows 11 SDK 10.0
       shell: pwsh
       run: |
-        choco install windows-sdk-10.0.22000.194 -y
+        choco install windows-sdk-10.0 -y
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.1
 
     - name: Build UWP solution and create app package
       shell: cmd
-      run: msbuild SimpliPlay/SimpliPlay/SimpliPlay.sln /p:Configuration=Release /p:Platform=x86 /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload /p:TargetPlatformVersion=10.0.22000.194
+      run: msbuild SimpliPlay/SimpliPlay/SimpliPlay.sln /p:Configuration=Release /p:Platform=x86 /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload /p:TargetPlatformVersion=10.0
 
     - name: Publish app package artifact
       uses: actions/upload-artifact@v4
