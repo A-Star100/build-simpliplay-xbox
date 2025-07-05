@@ -41,7 +41,17 @@ jobs:
         Start-Process -FilePath $installer -ArgumentList '/quiet', '/norestart' -Wait
         Remove-Item $installer
 
-          
+    - name: Fallback: Register SDK 10.0.26624 with DISM
+      shell: pwsh
+      run: |
+        DISM /Online /Add-Capability /CapabilityName:WindowsSoftwareDevelopmentKit.10.0.26624.0~~~~x86~ /NoRestart
+
+    - name: Verify SDK installation
+      shell: pwsh
+      run: |
+        Write-Host "Available SDK Reference Folders:"
+        Get-ChildItem "C:\Program Files (x86)\Windows Kits\10\References" | Select-Object Name
+
     - name: Install Visual Studio 2022 .NET SDK
       shell: pwsh
       run: |
@@ -50,8 +60,6 @@ jobs:
         Invoke-WebRequest -Uri $url -OutFile $installer
         Start-Process -FilePath $installer -ArgumentList '/quiet', '/norestart' -Wait
         Remove-Item $installer
-
-
 
     - name: Install UWP Build Tools workload
       shell: pwsh
